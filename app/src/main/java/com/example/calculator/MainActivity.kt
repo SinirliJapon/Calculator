@@ -65,6 +65,9 @@ class MainActivity : AppCompatActivity() {
             R.id.btnReset -> {
                 etResult.text = ""
                 operation.text = ""
+                num1 = 0.0
+                num2 = 0.0
+                operator = ' '
             }
             R.id.btnClear -> {
                 val currentText = etResult.text.toString()
@@ -76,38 +79,27 @@ class MainActivity : AppCompatActivity() {
                 num2 = etResult.text.toString().toDouble()
 
                 when (operator) {
-                    '+' -> {
-                        val result = num1 + num2
-                        etResult.text = result.toString()
-                        operation.text = "$num1 + $num2 = $result"
-                    }
-                    '-' -> {
-                        val result = num1 - num2
-                        etResult.text = result.toString()
-                        operation.text = "$num1 - $num2 = $result"
-                    }
-                    '*' -> {
-                        val result = num1 * num2
-                        etResult.text = result.toString()
-                        operation.text = "$num1 x $num2 = $result"
-                    }
+                    '+' -> etResult.text = (num1 + num2).toString()
+                    '-' -> etResult.text = (num1 - num2).toString()
+                    '*' -> etResult.text = (num1 * num2).toString()
                     '/' -> {
                         if (num2 != 0.0) {
-                            val result = num1 / num2
-                            etResult.text = result.toString()
-                            operation.text = "$num1 / $num2 = $result"
+                            etResult.text = (num1 / num2).toString()
                         } else {
                             etResult.text = "Error"
                             operation.text = "Cannot divide by 0"
                         }
                     }
                     else -> {
-                        etResult.text = ""
-                        operator = ' '
-                        num1 = 0.0
-                        num2 = 0.0
+                        // Handle other cases if needed
                     }
                 }
+
+                // Reset the operator and operands after calculation
+                operator = ' '
+                num1 = 0.0
+                num2 = 0.0
+                operation.text = ""
             }
         }
     }
